@@ -1,8 +1,13 @@
 /**************************************
 * Name: Jon Welch
 * Assignment: 8
-* Purpose of the file: This file contains the definition of the BinTree class.
-* It declares the structure for Data, DataNode, and the BinTree class methods and attributes.
+* Purpose of the file: This header file contains the definition of the BinTree class.
+* It declares the BinTree class methods and attributes.
+* them in a binary search tree order based on their id.
+*
+* @attrib root : pointer to the root node of the tree
+* @attrib count : number of nodes in the tree
+* @note This file is associated with [BinTree.cpp]&[data.h];
 ***************************************/
 
 #ifndef BINTREE_H
@@ -10,22 +15,43 @@
 
 #include <iostream>
 #include <string>
+#include "data.h"
 
-struct Data
-{
-    int id;
-    std::string data;
-};
-
-struct DataNode
-{
-    Data data;
-    DataNode* left;
-    DataNode* right;
-};
+using std::cout;
+using std::endl;
+using std::string;
 
 class BinTree
 {
+    public:
+    /**********************
+    Constructors/Destructor
+    ***********************/
+    BinTree();
+    ~BinTree();
+
+    /**********************
+    Getters/Accessors
+    ***********************/
+    bool isEmpty();
+    int getCount();
+    bool getRootData(Data*);
+    int getHeight();
+
+    /**********************
+    Setters/Mutators
+    ***********************/
+    bool addNode(int, const std::string&);
+    bool removeNode(int);
+    bool getNode(Data*, int);
+    bool contains(int);
+    void clear();
+
+    void displayTree();
+    void displayPreOrder();
+    void displayPostOrder();
+    void displayInOrder();
+
     private:
     DataNode* root;
     int count;
@@ -41,25 +67,6 @@ class BinTree
     void displayPostOrder(DataNode*);
     void displayInOrder(DataNode*);
 
-    public:
-    BinTree();
-    ~BinTree();
-
-    bool isEmpty();
-    int getCount();
-    bool getRootData(Data*);
-    void displayTree();
-    void clear();
-    bool addNode(int, const std::string&);
-    bool removeNode(int);
-    bool getNode(Data*, int);
-    bool contains(int);
-    int getHeight();
-    void displayPreOrder();
-    void displayPostOrder();
-    void displayInOrder();
-};
-
-#endif
+};#endif /* BINTREE_H */
 
 

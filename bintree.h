@@ -41,7 +41,7 @@ class BinTree
     /**********************
     Setters/Mutators
     ***********************/
-    bool addNode(int, const std::string&);
+    bool addNode(int, const std::string*);
     bool removeNode(int);
     bool getNode(Data*, int) const;
     bool contains(int) const;

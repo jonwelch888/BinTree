@@ -73,7 +73,7 @@ bool BinTree::addNode(int id, const std::string* data)
     @param data : A pointer to the string data.
     @return : true if the new node was successfully inserted, false otherwise.
     *********************************************/
-    bool success = (id > 0 && data != nullprt &&!data.empty());
+    bool success = (id > 0 && data != nullprr && !data->empty());
     if (success)
     {
         DataNode* newNode = new DataNode;

@@ -7,7 +7,7 @@
 *
 * @attrib root : pointer to the root node of the tree
 * @attrib count : number of nodes in the tree
-* @note This file is associated with [BinTree.cpp]&[data.h];
+* @note This file is associated with [bintree.cpp], & [data.h];
 ***************************************/
 
 #ifndef BINTREE_H
@@ -33,24 +33,24 @@ class BinTree
     /**********************
     Getters/Accessors
     ***********************/
-    bool isEmpty();
-    int getCount();
-    bool getRootData(Data*);
-    int getHeight();
+    bool isEmpty() const;
+    int getCount() const;
+    bool getRootData(Data*) const;
+    int getHeight() const;
 
     /**********************
     Setters/Mutators
     ***********************/
     bool addNode(int, const std::string&);
     bool removeNode(int);
-    bool getNode(Data*, int);
-    bool contains(int);
+    bool getNode(Data*, int) const;
+    bool contains(int) const;
     void clear();
 
-    void displayTree();
-    void displayPreOrder();
-    void displayPostOrder();
-    void displayInOrder();
+    void displayTree() const;
+    void displayPreOrder() const;
+    void displayPostOrder() const;
+    void displayInOrder() const;
 
     private:
     DataNode* root;
@@ -59,14 +59,16 @@ class BinTree
     void clear(DataNode*);
     bool addNode(DataNode*, DataNode**);
     DataNode* removeNode(int, DataNode*);
-    DataNode* findMin(DataNode*);
-    bool getNode(Data*, int, DataNode*);
-    bool contains(int, DataNode*);
-    int getHeight(DataNode*);
-    void displayPreOrder(DataNode*);
-    void displayPostOrder(DataNode*);
-    void displayInOrder(DataNode*);
+    DataNode* findMin(DataNode*) const;
+    bool getNode(Data*, int, DataNode*) const;
+    bool contains(int, DataNode*) const;
+    int getHeight(DataNode*) const;
+    void displayPreOrder(DataNode*) const;
+    void displayPostOrder(DataNode*) const;
+    void displayInOrder(DataNode*) const;
+};
 
-};#endif /* BINTREE_H */
+#endif /* BINTREE_H */
+
 
 

@@ -65,7 +65,7 @@ bool BinTree::getRootData(Data* data) const
     return success;
 }
 
-bool BinTree::addNode(int id, const std::string& data)
+bool BinTree::addNode(int id, const std::string* data)
 {
     /*********************************************
     addNode: Adds a new node with the given id and data to the tree.
@@ -73,12 +73,12 @@ bool BinTree::addNode(int id, const std::string& data)
     @param data : A pointer to the string data.
     @return : true if the new node was successfully inserted, false otherwise.
     *********************************************/
-    bool success = (id > 0 && !data.empty());
+    bool success = (id > 0 && data != nullprt &&!data.empty());
     if (success)
     {
         DataNode* newNode = new DataNode;
         newNode->data.id = id;
-        newNode->data.information = data;
+        newNode->data.information = *data;
         newNode->left = nullptr;
         newNode->right = nullptr;
         success = addNode(newNode, &root);

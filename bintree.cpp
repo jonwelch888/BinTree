@@ -5,11 +5,11 @@
 * It handles dynamic memory allocation and supports operations such as adding, deleting,
 * retrieving, and displaying nodes in a binary search tree.
 *
-* @note This file is associated with [BinTree.h];
+* @note This file is associated with [bintree.h];
 *********************************************/
 
-#include "BinTree.h"
-//#include <iostream>
+#include "bintree.h"
+
 
 BinTree::BinTree() : root(nullptr), count(0)
 {

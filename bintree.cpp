@@ -236,9 +236,10 @@ DataNode* BinTree::removeNode(int id, DataNode* node)
     removeNode: Recursively removes a node with the given id.
     @param id : The id of the node to remove.
     @param node : The current node being checked.
-    @return : Pointer to the removed node, or nullptr if not found.
+    @return : Pointer to the updated subtree after removal.
     *********************************************/
-    DataNode* removedNode = nullptr;
+    DataNode* result = node;
+
     if (node != nullptr)
     {
         if (id < node->data.id)
@@ -251,25 +252,24 @@ DataNode* BinTree::removeNode(int id, DataNode* node)
         }
         else
         {
-            removedNode = node;
-            if (node->left == nullptr)
+            //nnode with only one child or no child
+            if (node->left == nullptr || node->right == nullptr)
             {
-                node = node->right;
-            }
-            else if (node->right == nullptr)
-            {
-                node = node->left;
+                DataNode* temp = node->left ? node->left : node->right;
+                delete node;
+                result = temp;
             }
             else
             {
-                DataNode* minRight = findMin(node->right);
-                node->data = minRight->data;
-                node->right = removeNode(minRight->data.id, node->right);
-                removedNode = minRight;
+                // node with two children: get the inorder successor
+                DataNode* temp = findMin(node->right);
+                node->data = temp->data;
+                node->right = removeNode(temp->data.id, node->right);
+                result = node;
             }
         }
     }
-    return removedNode;
+    return result;
 }
 
 DataNode* BinTree::findMin(DataNode* node) const

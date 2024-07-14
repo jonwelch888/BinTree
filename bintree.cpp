@@ -279,7 +279,12 @@ DataNode* BinTree::findMin(DataNode* node) const
     @param node : The root of the subtree to search.
     @return : Pointer to the node with the minimum id.
     *********************************************/
-    return node->left == nullptr ? node : findMin(node->left);
+    DataNode* current = node;
+    while (current && current->left != nullptr)
+    {
+        current = current->left;
+    }
+    return current;
 }
 
 bool BinTree::getNode(Data* data, int id, DataNode* node) const

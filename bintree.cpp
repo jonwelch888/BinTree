@@ -402,7 +402,7 @@ void BinTree::displayInOrder(DataNode* node) const
 }
 
 
-void BinTree::printTree(DataNode* node, std::string indent = "", bool last = true) const {
+void BinTree::printTree(DataNode* node, std::string indent, bool last) const {
     if (node != nullptr) {
         std::cout << indent;
         if (last) {

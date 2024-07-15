@@ -238,37 +238,44 @@ DataNode* BinTree::removeNode(int id, DataNode* node)
     @param node : The current node being checked.
     @return : Pointer to the updated subtree after removal.
     *********************************************/
+    std::cout << "Entering removeNode with id: " << id << std::endl;
     DataNode* result = node;
 
     if (node != nullptr)
     {
         if (id < node->data.id)
         {
+            std::cout << "Going left from node id: " << node->data.id << std::endl;
             node->left = removeNode(id, node->left);
         }
         else if (id > node->data.id)
         {
+            std::cout << "Going right from node id: " << node->data.id << std::endl;
             node->right = removeNode(id, node->right);
         }
         else
         {
-            //nnode with only one child or no child
+            std::cout << "Node found with id: " << id << std::endl;
             if (node->left == nullptr || node->right == nullptr)
             {
+                std::cout << "Node has one or no children" << std::endl;
                 DataNode* temp = node->left ? node->left : node->right;
                 delete node;
                 result = temp;
+                std::cout << "Node deleted, result set to child or nullptr" << std::endl;
             }
             else
             {
-                // node with two children: get the inorder successor
+                std::cout << "Node has two children, finding inorder successor" << std::endl;
                 DataNode* temp = findMin(node->right);
                 node->data = temp->data;
                 node->right = removeNode(temp->data.id, node->right);
                 result = node;
+                std::cout << "Inorder successor replaced and node adjusted" << std::endl;
             }
         }
     }
+    std::cout << "Exiting removeNode" << std::endl;
     return result;
 }
 
@@ -279,11 +286,13 @@ DataNode* BinTree::findMin(DataNode* node) const
     @param node : The root of the subtree to search.
     @return : Pointer to the node with the minimum id.
     *********************************************/
+    std::cout << "Entering findMin" << std::endl;
     DataNode* current = node;
     while (current && current->left != nullptr)
     {
         current = current->left;
     }
+    std::cout << "Minimum node found with id: " << current->data.id << std::endl;
     return current;
 }
 

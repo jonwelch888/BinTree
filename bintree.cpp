@@ -8,7 +8,7 @@
 * @note This file is associated with [bintree.h];
 *********************************************/
 
-//====================================================BACKTEST [11];
+//====================================================BACKTEST final;
 
 #include "bintree.h"
 
@@ -89,14 +89,15 @@ bool BinTree::addNode(int id, const std::string* data)
     return success;
 }
 
-//--------*******-------
-
-
-
 bool BinTree::removeNode(int id)
 {
     /*********************************************
     removeNode: Removes the node with the given id from the tree.
+    This public method validates the id and initiates the removal process
+    by calling the private recursive removeNode function.
+    If the node is successfully removed, it deletes the node and updates
+    the node count.
+    
     @param id : The identifier for the node to remove.
     @return : true if the node was successfully removed, false otherwise.
     *********************************************/
@@ -117,9 +118,6 @@ bool BinTree::removeNode(int id)
     }
     return success;
 }
-
-
-//--------***********--------
 
 bool BinTree::getNode(Data* data, int id) const
 {
@@ -210,7 +208,7 @@ void BinTree::displayInOrder() const
     displayInOrder(root);
 }
 
-// Private methods
+//Private methods
 
 bool BinTree::addNode(DataNode* newNode, DataNode** node)
 {
@@ -240,25 +238,46 @@ bool BinTree::addNode(DataNode* newNode, DataNode** node)
     return success;
 }
 
-
-//-------=======trying again =======---------------
-
-
-
-DataNode* BinTree::removeNode(int id, DataNode* node, DataNode** removed) {
+DataNode* BinTree::removeNode(int id, DataNode* node, DataNode** removed) 
+{
+    /*********************************************
+    removeNode: Recursively removes the node with the given id from the tree.
+    This private method traverses the tree to find the node with the specified id.
+    It handles three cases:
+    1. Node has no children: Simply removes the node.
+    2. Node has one child: Replaces the node with its child.
+    3. Node has two children: Finds the in-order successor, replaces the node's 
+         data with the successor's data, and removes the successor.
+    
+    @param id : The identifier for the node to remove.
+    @param node : The current node being checked.
+    @param removed : A pointer to store the removed node for deletion.
+    @return : The updated subtree with the specified node removed.
+    *********************************************/
     DataNode* result = node;
-    if (node != nullptr) {
-        if (id < node->data.id) {
+    if (node != nullptr) 
+    {
+        if (id < node->data.id) 
+        {
             node->left = removeNode(id, node->left, removed);
-        } else if (id > node->data.id) {
+        } 
+        else if (id > node->data.id) 
+        {
             node->right = removeNode(id, node->right, removed);
-        } else {
+        } 
+        else 
+        {
             *removed = node;
-            if (node->left == nullptr) {
+            if (node->left == nullptr) 
+            {
                 result = node->right;
-            } else if (node->right == nullptr) {
+            } 
+            else if (node->right == nullptr) 
+            {
                 result = node->left;
-            } else {
+            } 
+            else 
+            {
                 DataNode* temp = findMin(node->right);
                 node->data = temp->data;
                 node->right = removeNode(temp->data.id, node->right, removed);
@@ -269,25 +288,17 @@ DataNode* BinTree::removeNode(int id, DataNode* node, DataNode** removed) {
     return result;
 }
 
-
-
-
-
-//-----===================---------
-
-
 DataNode* BinTree::findMin(DataNode* node) const
 {
-    std::cout << "Entering findMin" << std::endl;
+    /*********************************************
+    findMin: Finds the node with the minimum id in the given subtree.
+    @param node : The root of the subtree to search.
+    @return : Pointer to the node with the minimum id.
+    *********************************************/
     DataNode* current = node;
     while (current && current->left != nullptr)
     {
         current = current->left;
-    }
-    if (current) {
-        std::cout << "Minimum node found with id: " << current->data.id << std::endl;
-    } else {
-        std::cout << "Minimum node not found, current is nullptr" << std::endl;
     }
     return current;
 }
@@ -395,25 +406,7 @@ void BinTree::displayInOrder(DataNode* node) const
 }
 
 
-void BinTree::printTree(DataNode* node, std::string indent, bool last) const {
-    if (node != nullptr) {
-        std::cout << indent;
-        if (last) {
-            std::cout << "└─";
-            indent += "  ";
-        } else {
-            std::cout << "├─";
-            indent += "| ";
-        }
-        std::cout << node->data.id << std::endl;
-        printTree(node->left, indent, false);
-        printTree(node->right, indent, true);
-    }
-}
 
-void BinTree::printTree() const {
-    printTree(root);
-}
 
 
 

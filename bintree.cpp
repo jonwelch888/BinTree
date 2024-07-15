@@ -8,7 +8,7 @@
 * @note This file is associated with [bintree.h];
 *********************************************/
 
-// BACKTEST 4
+// BACKTEST 5
 
 #include "bintree.h"
 
@@ -234,12 +234,6 @@ bool BinTree::addNode(DataNode* newNode, DataNode** node)
 
 DataNode* BinTree::removeNode(int id, DataNode* node)
 {
-    /*********************************************
-    removeNode: Recursively removes a node with the given id.
-    @param id : The id of the node to remove.
-    @param node : The current node being checked.
-    @return : Pointer to the updated subtree after removal.
-    *********************************************/
     std::cout << "Entering removeNode with id: " << id << std::endl;
     DataNode* result = node;
 
@@ -281,24 +275,23 @@ DataNode* BinTree::removeNode(int id, DataNode* node)
             }
         }
     }
-    std::cout << "Exiting removeNode" << std::endl;
+    std::cout << "Exiting removeNode, returning node with id: " << (result ? result->data.id : -1) << std::endl;
     return result;
 }
 
 DataNode* BinTree::findMin(DataNode* node) const
 {
-    /*********************************************
-    findMin: Finds the node with the minimum id in the given subtree.
-    @param node : The root of the subtree to search.
-    @return : Pointer to the node with the minimum id.
-    *********************************************/
     std::cout << "Entering findMin" << std::endl;
     DataNode* current = node;
     while (current && current->left != nullptr)
     {
         current = current->left;
     }
-    std::cout << "Minimum node found with id: " << current->data.id << std::endl;
+    if (current) {
+        std::cout << "Minimum node found with id: " << current->data.id << std::endl;
+    } else {
+        std::cout << "Minimum node not found, current is nullptr" << std::endl;
+    }
     return current;
 }
 

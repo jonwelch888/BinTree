@@ -67,12 +67,6 @@ class BinTree
     void displayPostOrder(DataNode*) const;
     void displayInOrder(DataNode*) const;
 
-     // nnew fx's for debugging
-    void printTree(DataNode*, std::string indent = "", bool last = true) const;
-    void printTree() const;
-
-
-
 };
 
 #endif /* BINTREE_H */

@@ -8,7 +8,7 @@
 * @note This file is associated with [bintree.h];
 *********************************************/
 
-// BACKTEST [9];
+// BACKTEST [10];
 
 #include "bintree.h"
 
@@ -231,6 +231,9 @@ bool BinTree::addNode(DataNode* newNode, DataNode** node)
     }
     return success;
 }
+//----------------------
+
+
 
 DataNode* BinTree::removeNode(int id, DataNode* node) {
     std::cout << "Entering removeNode with id: " << id << std::endl;
@@ -250,7 +253,8 @@ DataNode* BinTree::removeNode(int id, DataNode* node) {
                 std::cout << "Node has one or no children" << std::endl;
                 DataNode* temp = node->left ? node->left : node->right;
                 std::cout << "Deleting node with id: " << node->data.id << std::endl;
-                node->left = node->right = nullptr;
+                node->left = nullptr;
+                node->right = nullptr;
                 delete node;
                 result = temp;
                 std::cout << "Node deleted, result set to child or nullptr" << std::endl;
@@ -267,10 +271,14 @@ DataNode* BinTree::removeNode(int id, DataNode* node) {
         }
     }
     std::cout << "Exiting removeNode, returning node with id: " << (result ? result->data.id : -1) << std::endl;
+    printTree(root);  // Display tree state after each operation
     return result;
 }
 
 
+
+
+//--------------
 
 
 DataNode* BinTree::findMin(DataNode* node) const

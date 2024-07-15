@@ -8,7 +8,7 @@
 * @note This file is associated with [bintree.h];
 *********************************************/
 
-// BACKTEST 5
+// BACKTEST 6
 
 #include "bintree.h"
 
@@ -276,8 +276,12 @@ DataNode* BinTree::removeNode(int id, DataNode* node)
         }
     }
     std::cout << "Exiting removeNode, returning node with id: " << (result ? result->data.id : -1) << std::endl;
+    std::cout << "Tree state after operation:" << std::endl;
+    printTree(root);
     return result;
 }
+
+
 
 DataNode* BinTree::findMin(DataNode* node) const
 {
@@ -396,6 +400,28 @@ void BinTree::displayInOrder(DataNode* node) const
         displayInOrder(node->right);
     }
 }
+
+
+void BinTree::printTree(DataNode* node, std::string indent = "", bool last = true) const {
+    if (node != nullptr) {
+        std::cout << indent;
+        if (last) {
+            std::cout << "└─";
+            indent += "  ";
+        } else {
+            std::cout << "├─";
+            indent += "| ";
+        }
+        std::cout << node->data.id << std::endl;
+        printTree(node->left, indent, false);
+        printTree(node->right, indent, true);
+    }
+}
+
+void BinTree::printTree() const {
+    printTree(root);
+}
+
 
 
 

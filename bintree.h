@@ -58,7 +58,7 @@ class BinTree
 
     void clear(DataNode*);
     bool addNode(DataNode*, DataNode**);
-    DataNode* removeNode(int, DataNode*);
+    DataNode* removeNode(int, DataNode*, DataNode**);
     DataNode* findMin(DataNode*) const;
     bool getNode(Data*, int, DataNode*) const;
     bool contains(int, DataNode*) const;

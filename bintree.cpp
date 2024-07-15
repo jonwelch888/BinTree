@@ -272,7 +272,9 @@ DataNode* BinTree::removeNode(int id, DataNode* node)
             {
                 std::cout << "Node has two children, finding inorder successor" << std::endl;
                 DataNode* temp = findMin(node->right);
+                std::cout << "Inorder successor found with id: " << temp->data.id << std::endl;
                 node->data = temp->data;
+                std::cout << "Node data replaced with inorder successor's data, new node data id: " << node->data.id << std::endl;
                 node->right = removeNode(temp->data.id, node->right);
                 result = node;
                 std::cout << "Inorder successor replaced and node adjusted" << std::endl;

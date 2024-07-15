@@ -8,7 +8,7 @@
 * @note This file is associated with [bintree.h];
 *********************************************/
 
-// BACKTEST [10];
+//====================================================BACKTEST [11];
 
 #include "bintree.h"
 
@@ -89,6 +89,10 @@ bool BinTree::addNode(int id, const std::string* data)
     return success;
 }
 
+//--------*******-------
+
+
+
 bool BinTree::removeNode(int id)
 {
     /*********************************************
@@ -99,7 +103,8 @@ bool BinTree::removeNode(int id)
     bool success = (id > 0);
     if (success)
     {
-        DataNode* removed = removeNode(id, root);
+        DataNode* removed = nullptr;
+        root = removeNode(id, root, &removed);
         if (removed)
         {
             delete removed;
@@ -112,6 +117,9 @@ bool BinTree::removeNode(int id)
     }
     return success;
 }
+
+
+//--------***********--------
 
 bool BinTree::getNode(Data* data, int id) const
 {
@@ -231,54 +239,41 @@ bool BinTree::addNode(DataNode* newNode, DataNode** node)
     }
     return success;
 }
-//----------------------
+
+
+//-------=======trying again =======---------------
 
 
 
-DataNode* BinTree::removeNode(int id, DataNode* node) {
-    std::cout << "Entering removeNode with id: " << id << std::endl;
+DataNode* BinTree::removeNode(int id, DataNode* node, DataNode** removed) {
     DataNode* result = node;
-
     if (node != nullptr) {
-        std::cout << "Current node id: " << node->data.id << std::endl;
         if (id < node->data.id) {
-            std::cout << "Going left from node id: " << node->data.id << std::endl;
-            node->left = removeNode(id, node->left);
+            node->left = removeNode(id, node->left, removed);
         } else if (id > node->data.id) {
-            std::cout << "Going right from node id: " << node->data.id << std::endl;
-            node->right = removeNode(id, node->right);
+            node->right = removeNode(id, node->right, removed);
         } else {
-            std::cout << "Node found with id: " << id << std::endl;
-            if (node->left == nullptr || node->right == nullptr) {
-                std::cout << "Node has one or no children" << std::endl;
-                DataNode* temp = node->left ? node->left : node->right;
-                std::cout << "Deleting node with id: " << node->data.id << std::endl;
-                node->left = nullptr;
-                node->right = nullptr;
-                delete node;
-                result = temp;
-                std::cout << "Node deleted, result set to child or nullptr" << std::endl;
+            *removed = node;
+            if (node->left == nullptr) {
+                result = node->right;
+            } else if (node->right == nullptr) {
+                result = node->left;
             } else {
-                std::cout << "Node has two children, finding inorder successor" << std::endl;
                 DataNode* temp = findMin(node->right);
-                std::cout << "Inorder successor found with id: " << temp->data.id << std::endl;
                 node->data = temp->data;
-                std::cout << "Node data replaced with inorder successor's data, new node data id: " << node->data.id << std::endl;
-                node->right = removeNode(temp->data.id, node->right);
+                node->right = removeNode(temp->data.id, node->right, removed);
                 result = node;
-                std::cout << "Inorder successor replaced and node adjusted" << std::endl;
             }
         }
     }
-    std::cout << "Exiting removeNode, returning node with id: " << (result ? result->data.id : -1) << std::endl;
-    printTree(root);  // Display tree state after each operation
     return result;
 }
 
 
 
 
-//--------------
+
+//-----===================---------
 
 
 DataNode* BinTree::findMin(DataNode* node) const

@@ -243,6 +243,7 @@ DataNode* BinTree::removeNode(int id, DataNode* node)
 
     if (node != nullptr)
     {
+        std::cout << "Current node id: " << node->data.id << std::endl;
         if (id < node->data.id)
         {
             std::cout << "Going left from node id: " << node->data.id << std::endl;
@@ -260,6 +261,7 @@ DataNode* BinTree::removeNode(int id, DataNode* node)
             {
                 std::cout << "Node has one or no children" << std::endl;
                 DataNode* temp = node->left ? node->left : node->right;
+                std::cout << "Deleting node with id: " << node->data.id << std::endl;
                 delete node;
                 result = temp;
                 std::cout << "Node deleted, result set to child or nullptr" << std::endl;

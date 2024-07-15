@@ -8,7 +8,6 @@
 * @note This file is associated with [bintree.h];
 *********************************************/
 
-//====================================================BACKTEST final;
 
 #include "bintree.h"
 
